@@ -354,7 +354,8 @@ def compute_distance_and_angle(mol, smi_linker, smi_frags):
         frags_matches = list(mol.GetSubstructMatches(qfrag, uniquify=False))
         qlinker = Chem.AdjustQueryProperties(linker,qp)
         linker_matches = list(mol.GetSubstructMatches(qlinker, uniquify=False))
-            
+        if len(linker_matches) == 0:
+            linker_matches = [()]
         # Loop over matches
         for frag_match, linker_match in product(frags_matches, linker_matches):
             # Check if match
